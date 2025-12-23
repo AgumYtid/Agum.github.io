@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Surat untuk Mama</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
+  font-family:Georgia,serif;
+  overflow:hidden;
+}
+
+/* PARTIKEL BUNGA */
+.flower{
+  position:absolute;
+  top:-20px;
+  font-size:18px;
+  animation:jatuh linear infinite;
+}
+@keyframes jatuh{
+  from{transform:translateY(-20px)}
+  to{transform:translateY(110vh)}
+}
+
+/* SURAT POS */
+.pos{
+  width:260px;
+  height:300px;
+  background:#e53935;
+  border-radius:20px 20px 30px 30px;
+  box-shadow:0 12px 25px rgba(0,0,0,.3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  position:relative;
+  animation:float 2s infinite;
+  z-index:5;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+
+/* GELEMBUNG */
+.bubble{
+  position:absolute;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  opacity:.8;
+  animation:bubbleMove 1.2s forwards;
+}
+@keyframes bubbleMove{
+  from{transform:scale(0)}
+  to{
+    transform:scale(1.4)
+    translate(
+      calc(-100px + 200px * var(--x)),
+      calc(-100px + 200px * var(--y))
+    );
+    opacity:0;
+  }
+}
+
+/* SURAT */
+.surat{
+  display:none;
+  width:340px;
+  background:#fffdf7;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 12px 25px rgba(0,0,0,.3);
+  animation:buka 1.2s;
+  z-index:10;
+}
+@keyframes buka{
+  from{opacity:0;transform:scale(.85)}
+  to{opacity:1;transform:scale(1)}
+}
+
+h1{color:#e91e63;text-align:center}
+p{color:#444;line-height:1.6;text-align:justify}
+.tanda{text-align:right;font-style:italic;margin-top:20px}
+
+button{
+  margin-top:15px;
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  background:#e91e63;
+  color:white;
+}
+</style>
+</head>
+<body>
+
+<div class="pos" id="pos" onclick="bukaSurat()">
+  📮 Klik Surat Pos
+</div>
+
+<div class="surat" id="surat">
+  <h1>💐 Untuk Mama 💐</h1>
+
+  <p>
+    Mama tersayang,<br><br>
+    Cintamu tidak pernah hilang,
+    ia hanya berubah bentuk—
+    menjadi doa, kekuatan,
+    dan cahaya dalam hidupku.
+  </p>
+
+  <p>
+    Terima kasih telah menjadi
+    rumah paling hangat
+    yang selalu menyambutku pulang.
+  </p>
+
+  <div class="tanda">
+    Dengan cinta,<br>
+    Anakmu 🤍
+  </div>
+
+  <button onclick="tutupSurat()">Tutup Surat</button>
+</div>
+
+<script>
+const pos = document.getElementById("pos");
+const surat = document.getElementById("surat");
+const warna = ["#ff8a80","#ffd180","#ffff8d","#b9f6ca","#82b1ff","#ea80fc"];
+
+/* BUNGA JATUH */
+setInterval(()=>{
+  let f = document.createElement("div");
+  f.className="flower";
+  f.innerText="🌸";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=3+Math.random()*3+"s";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),6000);
+},500);
+
+function bukaSurat(){
+  for(let i=0;i<16;i++){
+    let b=document.createElement("div");
+    b.className="bubble";
+    b.style.background=warna[Math.floor(Math.random()*warna.length)];
+    b.style.left="115px";
+    b.style.top="140px";
+    b.style.setProperty("--x",Math.random());
+    b.style.setProperty("--y",Math.random());
+    pos.appendChild(b);
+    setTimeout(()=>b.remove(),1200);
+  }
+
+  setTimeout(()=>{
+    pos.style.display="none";
+    surat.style.display="block";
+  },1000);
+}
+
+function tutupSurat(){
+  surat.style.display="none";
+  pos.style.display="flex";
+  pos.innerHTML="📮 Klik Surat Pos";
+}
+</script>
+
+</body>
+</html>
