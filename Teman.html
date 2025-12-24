@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Minecraft Tahun Baru</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  color: white;
+  text-align: center;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.page.active {
+  display: block;
+}
+
+/* BOX */
+.box {
+  background: rgba(0,0,0,0.55);
+  border: 4px solid #2e7d32;
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  animation: fade 1s;
+}
+
+/* BIOME BACKGROUND */
+.plains { background: linear-gradient(#5ecbff 60%, #3cb043 60%); }
+.forest { background: linear-gradient(#4caf50 55%, #1b5e20 55%); }
+.desert { background: linear-gradient(#ffe082 60%, #f9a825 60%); }
+.snow   { background: linear-gradient(#e3f2fd 60%, #bbdefb 60%); }
+.nether { background: linear-gradient(#3e2723 60%, #b71c1c 60%); }
+
+/* BLOCK STYLE */
+.block {
+  width: 90px;
+  height: 90px;
+  margin: 20px auto;
+  border: 4px solid #000;
+  animation: float 2s ease-in-out infinite;
+}
+
+/* BLOCK TYPES */
+.grass {
+  background: linear-gradient(#3cb043 35%, #8b5a2b 35%);
+  border-color: #1b5e20;
+}
+
+.log {
+  background: repeating-linear-gradient(
+    90deg,
+    #8d6e63,
+    #8d6e63 10px,
+    #6d4c41 10px,
+    #6d4c41 20px
+  );
+}
+
+.sand {
+  background: repeating-linear-gradient(
+    45deg,
+    #fff176,
+    #fff176 10px,
+    #fdd835 10px,
+    #fdd835 20px
+  );
+}
+
+.snowblock {
+  background: linear-gradient(#ffffff, #e0f7fa);
+}
+
+.netherrack {
+  background: repeating-linear-gradient(
+    45deg,
+    #8e0000,
+    #8e0000 10px,
+    #4e0000 10px,
+    #4e0000 20px
+  );
+}
+
+/* ANIMATION */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+/* BUTTON */
+button {
+  margin-top: 15px;
+  padding: 10px 22px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #66ff66;
+  color: black;
+}
+
+@keyframes fade {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HALAMAN 1 PLAINS -->
+<div class="page active plains">
+  <div class="box">
+    <h1>🌱 Plains Biome</h1>
+    <div class="block grass"></div>
+    <p>Selamat Tahun Baru 🎆</p>
+    <p>Semoga langkahmu di tahun ini</p>
+    <p>seluas padang rumput Minecraft</p>
+    <button onclick="nextPage()">Next ▶</button>
+  </div>
+</div>
+
+<!-- HALAMAN 2 FOREST -->
+<div class="page forest">
+  <div class="box">
+    <h1>🌲 Forest Biome</h1>
+    <div class="block log"></div>
+    <p>Seperti pohon di hutan</p>
+    <p>semoga kamu terus bertumbuh</p>
+    <p>kuat dari dalam 🌳</p>
+    <button onclick="nextPage()">Next ▶</button>
+  </div>
+</div>
+
+<!-- HALAMAN 3 DESERT -->
+<div class="page desert">
+  <div class="box">
+    <h1>🏜️ Desert Biome</h1>
+    <div class="block sand"></div>
+    <p>Walau jalan terasa panas</p>
+    <p>dan melelahkan</p>
+    <p>jangan berhenti berjalan ☀️</p>
+    <button onclick="nextPage()">Next ▶</button>
+  </div>
+</div>
+
+<!-- HALAMAN 4 SNOW -->
+<div class="page snow">
+  <div class="box">
+    <h1>❄️ Snow Biome</h1>
+    <div class="block snowblock"></div>
+    <p>Meski suasana terasa dingin</p>
+    <p>semoga hatimu tetap hangat</p>
+    <p>oleh orang-orang tersayang 💙</p>
+    <button onclick="nextPage()">Next ▶</button>
+  </div>
+</div>
+
+<!-- HALAMAN 5 NETHER -->
+<div class="page nether">
+  <div class="box">
+    <h1>🔥 Nether (Penutup)</h1>
+    <div class="block netherrack"></div>
+    <p>Di dunia tersulit sekalipun</p>
+    <p>kamu tetap bisa bertahan</p>
+    <p>Happy New Year 🎉</p>
+    <button onclick="restart()">🔁 Kembali ke Awal</button>
+  </div>
+</div>
+
+<script>
+let page = 0;
+const pages = document.querySelectorAll('.page');
+
+function nextPage(){
+  pages[page].classList.remove('active');
+  page++;
+  if(page < pages.length){
+    pages[page].classList.add('active');
+  }
+}
+
+function restart(){
+  pages[page].classList.remove('active');
+  page = 0;
+  pages[page].classList.add('active');
+}
+</script>
+
+</body>
+</html>
